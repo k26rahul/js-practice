@@ -1,3 +1,151 @@
+### 1. **Car**
+
+**Properties:**
+
+- `brand` (string): The car's brand.
+- `model` (string): The car's model.
+- `year` (number): The car's manufacturing year.
+- `speed` (number): The car's current speed (default: 0).
+
+**Methods:**
+
+1. `accelerate(amount)` (number): Increases `speed` by `amount`.
+2. `brake(amount)` (number): Decreases `speed` by `amount` but not below 0.
+3. `getAge(currentYear)` (number): Returns the car's age (currentYear - year).
+4. `getDetails()`: Returns a string in this format: `"Brand: [brand], Model: [model], Year: [year]"`.
+
+**Test Code:**
+
+```javascript
+const car = new Car('Toyota', 'Corolla', 2015);
+console.log(car.getDetails()); // Brand: Toyota, Model: Corolla, Year: 2015
+car.accelerate(20);
+console.log(car.speed); // 20
+car.brake(5);
+console.log(car.speed); // 15
+console.log(car.getAge(2025)); // 10
+car.brake(20);
+console.log(car.speed); // 0
+```
+
+---
+
+### 2. **Book**
+
+**Properties:**
+
+- `title` (string): The book's title.
+- `author` (string): The book's author.
+- `pages` (number): The total number of pages.
+- `currentPage` (number): Current reading page (default: 0).
+
+**Methods:**
+
+1. `read(pages)` (number): Adds `pages` to `currentPage`. Does not exceed `pages`.
+2. `restart()`: Resets `currentPage` to 0.
+3. `getProgress()`: Returns a string like `"Progress: [percentage]% read"`.
+4. `getDetails()`: Returns a string in this format: `"Title: [title], Author: [author]"`.
+
+**Test Code:**
+
+```javascript
+const book = new Book('1984', 'George Orwell', 328);
+console.log(book.getDetails()); // Title: 1984, Author: George Orwell
+book.read(50);
+console.log(book.currentPage); // 50
+book.read(300);
+console.log(book.currentPage); // 328
+console.log(book.getProgress()); // Progress: 100% read
+book.restart();
+console.log(book.currentPage); // 0
+```
+
+---
+
+### 3. **User**
+
+**Properties:**
+
+- `username` (string): The user's name.
+- `email` (string): The user's email.
+- `age` (number): The user's age.
+- `isActive` (boolean): User's active status (default: false).
+
+**Methods:**
+
+1. `login()`: Sets `isActive` to true.
+2. `logout()`: Sets `isActive` to false.
+3. `updateEmail(newEmail)` (string): Updates the `email` property.
+4. `getDetails()`: Returns a string like `"User: [username], Email: [email], Age: [age]"`.
+
+**Test Code:**
+
+```javascript
+const user = new User('john_doe', 'john@example.com', 25);
+console.log(user.getDetails()); // User: john_doe, Email: john@example.com, Age: 25
+user.login();
+console.log(user.isActive); // true
+user.logout();
+console.log(user.isActive); // false
+user.updateEmail('john.doe@gmail.com');
+console.log(user.email); // john.doe@gmail.com
+```
+
+---
+
+### 4. **Rectangle**
+
+**Properties:**
+
+- `width` (number): The rectangle's width.
+- `height` (number): The rectangle's height.
+
+**Methods:**
+
+1. `getArea()`: Returns the area (`width * height`).
+2. `getPerimeter()`: Returns the perimeter (`2 * (width + height)`).
+3. `resize(newWidth, newHeight)` (number, number): Updates `width` and `height`.
+4. `isSquare()`: Returns true if `width` and `height` are equal.
+
+**Test Code:**
+
+```javascript
+const rect = new Rectangle(10, 20);
+console.log(rect.getArea()); // 200
+console.log(rect.getPerimeter()); // 60
+rect.resize(15, 15);
+console.log(rect.isSquare()); // true
+console.log(rect.getArea()); // 225
+```
+
+---
+
+### 5. **Animal**
+
+**Properties:**
+
+- `name` (string): The animal's name.
+- `species` (string): The animal's species.
+- `sound` (string): The sound the animal makes.
+
+**Methods:**
+
+1. `makeSound()`: Returns the `sound` string.
+2. `getDetails()`: Returns a string in this format: `"Name: [name], Species: [species]"`.
+3. `rename(newName)` (string): Updates the `name` property.
+4. `describe()`: Logs `"The [species] [name] says [sound]"`.
+
+**Test Code:**
+
+```javascript
+const animal = new Animal('Leo', 'Lion', 'Roar');
+console.log(animal.getDetails()); // Name: Leo, Species: Lion
+console.log(animal.makeSound()); // Roar
+animal.rename('Max');
+console.log(animal.name); // Max
+animal.describe(); // The Lion Max says Roar
+```
+
 ### 6. **BankAccount**
 
 **Properties:**
