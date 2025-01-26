@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: lightblue;
+        color: crimson;
+        font-family: cursive;
+      }
+
+      h1,
+      h2 {
+        text-decoration: underline;
+      }
+
+      h2 {
+        background-color: blue;
+        color: chartreuse;
+      }
+
+      .alien-h1 {
+        font-family: monospace;
+      }
+
+      h1 {
+        background-color: black;
+      }
+
+      .normal-h1 {
+        background-color: bisque;
+      }
+
+      .special-h1 {
+        background-color: aquamarine;
+      }
+
+      .vip-h1 {
+        background-color: yellow;
+      }
+
+      .special-h1.vip-h1 {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Hello harikesh (no class)</h1>
+    <h2>SOME H2</h2>
+    <h1 class="normal-h1">Hello Vidu (normal)!!</h1>
+    <h1 class="special-h1">Hello India (special)!!</h1>
+    <h1 class="special-h1 vip-h1">Hello VIP (also special)!!</h1>
+
+    <div class="alien-h1">this is simple div</div>
+
+    <button onclick="sayHello()">Click me</button>
+
+    <script>
+      var name = 'muskan';
+      var h1 = document.querySelector('h1, h2');
+
+      console.log('out targeted tag is: ', h1);
+
+      function sayHello() {
+        console.log('button was pressed 👏👏');
+        console.log('Hello ' + name);
+        h1.innerText = 'hello muskan, welcome to js';
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+>phobiaibohphobiaibohphobiaibohphobiaibohp <
+
+i = 0
+j = 49 (last index of str)
+
+ith letter == jth letter:
+  continue: i+1, j+1, compare again
+
+if not equal:
+  declare not a palindrome

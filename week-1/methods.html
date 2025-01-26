@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const data = {
+        salary: 1000,
+        changeSalary: function (newSalary) {
+          if (newSalary < 500) {
+            throw new Error('salary is too low, pls increase amount');
+          }
+          this.salary = newSalary;
+        },
+      };
+
+      data.changeSalary(550);
+
+      console.log(data.salary);
+    </script>
+  </body>
+</html>

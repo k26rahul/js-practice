@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="main.js"></script>
+
+    <!-- <script>
+      console.log({ name: 'rahul', age: 22 }); // plain obj (no class)
+
+      class Student {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+      }
+
+      console.log(new Student('rahul', 22)); // Student obj
+    </script> -->
+
+    <!-- <script>
+      // console.log({ name: 'rahul' } == { name: 'rahul' });
+      // console.log('rahul' == 'rahul');
+
+      class Student {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+      }
+
+      let s1 = new Student('rahul', 22);
+      let s2 = new Student('rahul', 22);
+      console.log(s1 == s2);
+      console.log(s1.name == s2.name);
+    </script> -->
+
+    <!-- <script>
+      class Student {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+      }
+
+      let s1 = new Student('rahul', 22);
+      let s2 = new Student('muskan', 21);
+      let s3 = new Student('vidu', 20);
+
+      let school = [s1, s2, s3];
+
+      function giveMedal(toWhom) {
+        let winnerStudent = null; // assume not found
+
+        // search it
+        school.forEach(student => {
+          if (student.name == toWhom.name) {
+            winnerStudent = student;
+          }
+        });
+
+        if (winnerStudent == null) {
+          console.log('alien student'); // cannot find
+        } else {
+          console.log(`gold medal given to ${winnerStudent.name}`); // found
+        }
+      }
+
+      let myVidu = new Student('vidu', 20); // iitm mind ☠️
+      giveMedal(myVidu);
+    </script> -->
+  </body>
+</html>
