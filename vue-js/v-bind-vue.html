@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app">
+      <p v-bind:style="{fontSize: size, color: goodColor}">this is an image</p>
+      <img v-bind:src="myUrl" />
+
+      <div class="box" v-bind:style="{backgroundColor: `hsl(95, 100%, 50%)`}"></div>
+    </main>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            myUrl: './img_beach3.jpg',
+            size: '28px',
+            goodColor: 'crimson',
+            hue: 180,
+          };
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: inherit;
+  font-family: inherit;
+}
+
+body {
+  font-family: 'Aboreto', sans-serif;
+}
+
+h1 {
+  color: #580800;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+#menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.menu-item {
+  border: 1px solid #ddd;
+  max-width: 400px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.menu-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.menu-item .name {
+  margin: 1rem 0;
+  color: #580800;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.menu-item .desc {
+  margin: 1rem 0;
+  color: #546e7a;
+  font-style: italic;
+}
+
+.menu-item .price {
+  color: seagreen;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
