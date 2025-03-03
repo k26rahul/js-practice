@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function addToCart(item, quantity, callback) {
+        setTimeout(() => {
+          console.log('inside addToCart');
+          callback();
+        }, 1000);
+      }
+
+      function applyDiscount(code) {
+        console.log('inside applyDiscount');
+      }
+
+      function processPayment(amount, method, callback) {
+        setTimeout(() => {
+          console.log('inside processPayment');
+          callback();
+        }, 1000);
+      }
+
+      function generateInvoice(orderId) {
+        console.log('inside generateInvoice');
+      }
+
+      function shipOrder(address, callback) {
+        setTimeout(() => {
+          console.log('inside shipOrder');
+          callback();
+        }, 1000);
+      }
+
+      function main() {
+        addToCart('soap', 5, () => {
+          applyDiscount('ag');
+          processPayment(100, 'card', () => {
+            generateInvoice('123');
+            shipOrder('xyz address', () => {
+              console.log('checkout steps all done!');
+            });
+          });
+        });
+      }
+
+      main();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function addToCart(item, quantity) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log('inside addToCart');
+            resolve();
+          }, 1000);
+        });
+      }
+
+      function applyDiscount(code) {
+        console.log('inside applyDiscount');
+      }
+
+      function processPayment(amount, method) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log('inside processPayment');
+            resolve();
+          }, 1000);
+        });
+      }
+
+      function generateInvoice(orderId) {
+        console.log('inside generateInvoice');
+      }
+
+      function shipOrder(address) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log('inside shipOrder');
+            resolve();
+          }, 1000);
+        });
+      }
+
+      async function main() {
+        await addToCart('soap', 5);
+        applyDiscount('xyz');
+        await processPayment(100, 'credit card');
+        generateInvoice(123);
+        await shipOrder('abc address');
+        console.log('finally all checkout steps done!');
+      }
+
+      main();
+    </script>
+  </body>
+</html>
