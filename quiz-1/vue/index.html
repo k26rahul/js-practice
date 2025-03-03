@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+    <style>
+      .box {
+        width: 200px;
+        height: 100px;
+        background-color: orange;
+        display: none;
+      }
+
+      .box.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div :class="['box', {active: isBoxVisible}]"></div>
+      <button @click="toggleBox">Toggle box visibility</button>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          isBoxVisible: false,
+        },
+        methods: {
+          toggleBox() {
+            this.isBoxVisible = !this.isBoxVisible;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

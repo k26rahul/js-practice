@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      <cool-message></cool-message>
+      <cool-message></cool-message>
+      <cool-message></cool-message>
+      <cool-message></cool-message>
+    </div>
+
+    <script>
+      const coolMessage = {
+        template: `
+                  <div style="color: crimson">
+                    <p>this is inside my brand new tag, it's a cool message</p>
+                    <p>this is 2nd para, my name is {{name}}</p>
+                    <input type="text" placeholder="this is some text input" />
+                    <button>this is a button</button>
+                    <p>end of my cool message component</p>  
+                  </div>`,
+        data() {
+          return {
+            name: 'my cool name BOOM',
+          };
+        },
+      };
+
+      const app = new Vue({
+        el: '#app',
+        components: {
+          coolMessage,
+        },
+      });
+    </script>
+  </body>
+</html>

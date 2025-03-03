@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      <cool-message v-for="message of messages" :message="message"></cool-message>
+    </div>
+
+    <script>
+      const coolMessage = {
+        template: '<p>my message is {{message.message}}, my salary is {{message.salary}}</p>',
+        props: ['message'],
+      };
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+          messages: [
+            { message: 'this is message 1', salary: '7000' },
+            { message: 'this is message 2', salary: '8000' },
+            { message: 'this is message 3', salary: '9000' },
+          ],
+        },
+        components: {
+          coolMessage,
+        },
+      });
+    </script>
+  </body>
+</html>

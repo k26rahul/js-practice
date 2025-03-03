@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function submit() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log('submitted successfully');
+            resolve();
+          }, 5000);
+        });
+      }
+
+      function payment(money, app) {
+        console.log(`payment of Rs.${money} done using ${app} app`);
+      }
+
+      function verify(token) {
+        console.log(`token ${token} verified successfully`);
+      }
+
+      function accept(role) {
+        console.log(`role ${role} accepted`);
+      }
+
+      async function applyForm() {
+        // do submit, then payment, then verify, then accept
+        console.log('apply in progress...');
+        console.log('wait and enjoy...');
+
+        await submit();
+        payment(100, 'paytm');
+        verify('zys');
+        accept('teacher');
+      }
+
+      applyForm();
+
+      // function submit() {
+      //   return new Promise(resolve => {
+      //     setTimeout(() => {
+      //       console.log('submit successful');
+      //       resolve();
+      //     }, 1000);
+      //   });
+      // }
+
+      // function payment() {
+      //   console.log('payment done');
+      // }
+
+      // submit().then(() => {
+      //   payment();
+      // });
+
+      // let promise = new Promise(resolve => {
+      //   setTimeout(() => {
+      //     resolve('hello vidu');
+      //   }, 1000);
+      // });
+
+      // promise.then(result => {
+      //   console.log(`promise is fulfilled with result: ${result}`);
+      // });
+
+      // async function launch() {
+      //   console.log('inside launch()');
+      //   return 'launch success';
+      // }
+
+      // console.log(launch());
+
+      // submit(); // 1000ms
+      // payment(100, 'paytm'); // 500ms
+      // verify('xyz'); // 0ms
+      // accept('teacher'); // 0ms
+    </script>
+  </body>
+</html>

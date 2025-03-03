@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // function launch(callback) {
+      //   console.log('inside launch()');
+
+      //   setTimeout(() => {
+      //     console.log('launch successful');
+      //     callback();
+      //   }, 5000);
+
+      //   console.log('end of launch()');
+      // }
+
+      // function messagePresident() {
+      //   console.log('hello president, mission done!');
+      // }
+
+      // launch(messagePresident);
+
+      // function test() {
+      //   console.log('test is running');
+      //   return 'test is passed';
+      // }
+
+      // console.log(test());
+
+      function submit(callback) {
+        console.log('submitted successfully');
+        callback();
+      }
+
+      function payment(money, app, callback) {
+        console.log(`payment of Rs.${money} done using ${app} app`);
+        callback();
+      }
+
+      function verify(token, callback) {
+        console.log(`token ${token} verified successfully`);
+        callback();
+      }
+
+      function accept(role) {
+        console.log(`role ${role} accepted`);
+      }
+
+      console.log('going to submit');
+      submit(() => {
+        payment(100, 'paytm', () => {
+          verify('xyz', () => {
+            accept('teacher');
+          });
+        });
+      });
+
+      // function submit(callback, callbackArgs) {
+      //   console.log('submitted successfully');
+      //   callback(...callbackArgs);
+      // }
+
+      // function payment(money, app, callback, callbackArgs) {
+      //   console.log(`payment of Rs.${money} done using ${app} app`);
+      //   callback(...callbackArgs);
+      // }
+
+      // function verify(token, callback, callbackArgs) {
+      //   console.log(`token ${token} verified successfully`);
+      //   callback(...callbackArgs);
+      // }
+
+      // function accept(role) {
+      //   console.log(`role ${role} accepted`);
+      // }
+
+      // console.log('going to submit');
+      // submit(payment, [100, 'paytm', verify, ['xyz', accept, ['teacher']]]);
+
+      // regular function
+
+      // function greet() {
+      //   console.log('hello vidu');
+      // } // with name
+
+      // let greet2 = function () {
+      //   console.log('hello vidu');
+      // }; // anonymous
+
+      // let greet3 = function someName() {
+      //   console.log('hello vidu');
+      // }; // anonymous
+
+      // console.log(greet);
+      // console.log(greet2);
+      // console.log(greet3);
+
+      // let myCallback = function helloViduFn() {
+      //   console.log(`hello vidu, after 1000ms, ${new Date()}`);
+      // };
+
+      // let someCoolFn = myCallback;
+
+      // let someBadFn = someCoolFn;
+
+      // console.log(someBadFn);
+
+      // setInterval(someCoolFn, 1000);
+
+      // console.log('hello rahul');
+      // console.log('this is a beautiful day');
+    </script>
+  </body>
+</html>

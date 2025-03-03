@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p v-if="dark" v-bind:style="darkStyle">{{message}}</p>
+      <p v-else>{{message}}</p>
+      <button @click="toggleTheme">Change theme</button>
+      <button @click="changeDarkColor">Change dark color</button>
+      <button @click="changeFName">Change fname</button>
+
+      <p>{{fullname}}</p>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          fname: 'rahul',
+          lname: 'maurya',
+          dark: true,
+          message: 'iitm degree',
+          darkStyle: {
+            backgroundColor: 'black',
+            color: 'white',
+          },
+        },
+        methods: {
+          toggleTheme() {
+            this.dark = !this.dark;
+          },
+          changeDarkColor() {
+            this.darkStyle.color = 'yellow';
+          },
+          changeFName() {
+            this.fname = 'vidu';
+          },
+        },
+        computed: {
+          fullname() {
+            console.log('FULLNAME COMPUTED METHOD IS RUNNING');
+            return `${this.fname} ${this.lname}`;
+          },
+        },
+        watch: {
+          fname(newVal, oldVal) {
+            console.log('FNAME WATCHER IS RUNNING');
+            console.log(newVal, oldVal);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
