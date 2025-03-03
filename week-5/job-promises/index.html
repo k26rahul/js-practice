@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function apply() {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log('apply done');
+            resolve();
+          }, 2000);
+        });
+      }
+
+      function pay() {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log('pay done');
+            resolve();
+          }, 2000);
+        });
+      }
+
+      function verify() {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log('verify done');
+            resolve();
+          }, 1000);
+        });
+      }
+
+      function main() {
+        apply().then(() => {
+          pay().then(() => {
+            verify().then(() => {
+              console.log('finally all done!!');
+            });
+          });
+        });
+      }
+
+      main();
+    </script>
+  </body>
+</html>

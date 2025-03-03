@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function apply(callback) {
+        setTimeout(() => {
+          console.log('apply done');
+          callback();
+        }, 2000);
+      }
+
+      function pay(callback) {
+        setTimeout(() => {
+          console.log('pay done');
+          callback();
+        }, 2000);
+      }
+
+      function verify(callback) {
+        setTimeout(() => {
+          console.log('verify done');
+          callback();
+        }, 1000);
+      }
+
+      function main() {
+        apply(() => {
+          pay(() => {
+            verify(() => {
+              console.log('finally all done!!');
+            });
+          });
+        });
+      }
+
+      main();
+    </script>
+  </body>
+</html>
