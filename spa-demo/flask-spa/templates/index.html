@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FLASK SPA</title>
+    <style>
+      .page {
+        display: none;
+      }
+
+      .page.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="page" id="page-home"></div>
+    <div class="page" id="page-about"></div>
+    <div class="page" id="page-services"></div>
+    <div class="page" id="page-contact"></div>
+
+    <script>
+      function showActivePage() {
+        let activePage = location.hash.slice(1);
+        if (activePage == '') activePage = 'home';
+
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+
+        document.querySelector(`#page-${activePage}`).classList.add('active');
+
+        fetch(`/api/${activePage}`)
+          .then(response => response.text())
+          .then(data => console.log(data));
+      }
+
+      window.addEventListener('hashchange', () => {
+        showActivePage(); // every time hash changes
+      });
+
+      showActivePage(); // initially when pages loads
+    </script>
+  </body>
+</html>
