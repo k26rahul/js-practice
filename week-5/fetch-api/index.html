@@ -7,11 +7,14 @@
   </head>
   <body>
     <script>
-      let something = fetch('https://catfact.ninja/fact');
-      something.then(response => {
-        console.log('fetch finished, look at response:');
-        console.log(response);
-      });
+      async function main() {
+        let promise = fetch('https://catfact.ninja/fact');
+        let response = await promise;
+        let data = await response.json();
+        console.log(data);
+      }
+
+      main();
     </script>
   </body>
 </html>

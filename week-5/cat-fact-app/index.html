@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <main id="app">
+      <div>
+        using url:
+        <input type="text" v-model="url" />
+      </div>
+      <button @click="getNewFact">Get a random cat fact</button>
+      <div>{{fact}}</div>
+    </main>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            fact: 'loading...',
+            url: 'https://catfact.ninja/fact',
+          };
+        },
+        methods: {
+          getNewFact() {
+            fetch(this.url)
+              .then(response => response.json())
+              .then(data => {
+                this.fact = data.fact;
+              })
+              .catch(error => {
+                this.fact = 'FAILED...';
+              });
+          },
+        },
+        mounted() {
+          this.getNewFact();
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

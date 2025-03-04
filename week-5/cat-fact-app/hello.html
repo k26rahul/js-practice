@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <main id="app">
+      <h1>i am {{name}}, my salary is {{salary}}</h1>
+      <button @click="sayHello">Say hello</button>
+    </main>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            name: 'rahul',
+            salary: 10000,
+          };
+        },
+        methods: {
+          sayHello() {
+            console.log(`hello ${this.name}`);
+          },
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

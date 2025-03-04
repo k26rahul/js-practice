@@ -15,3 +15,25 @@ https://rapidapi.com/collection/list-of-free-apis
 https://www.freepublicapis.com/
 
 https://kibi.one/10-best-no-authentication-apis/
+
+---
+
+https://catfact.ninja/fact
+
+https://api.agify.io/?name=vidu
+
+https://api.genderize.io/?name=vidu
+
+https://api.nationalize.io/?name=vidu
+
+https://dog.ceo/api/breeds/image/random
+
+https://official-joke-api.appspot.com/random_joke
+
+https://randomuser.me/api/
+
+https://pokeapi.co/api/v2/pokemon/
+
+http://numbersapi.com/37
+
+https://datausa.io/api/data?drilldowns=Nation&measures=Population
