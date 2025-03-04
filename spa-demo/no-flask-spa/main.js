@@ -1,6 +1,10 @@
 function showActivePage() {
   let activePage = location.hash.slice(1);
 
+  if (activePage == '') {
+    activePage = 'index';
+  }
+
   document.querySelectorAll('.page').forEach(page => {
     page.classList.remove('active');
   });
