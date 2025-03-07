@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo Vue</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <style>
+      form {
+        width: fit-content;
+        margin: auto;
+        padding: 1rem;
+        border: 2px solid #333;
+      }
+
+      form div {
+        margin-bottom: 10px;
+      }
+
+      li {
+        cursor: pointer;
+        user-select: none;
+        line-height: 2rem;
+        display: flex;
+        align-items: center;
+      }
+
+      li.done > span {
+        text-decoration: line-through;
+      }
+
+      li.star {
+        color: red;
+      }
+
+      li a {
+        text-decoration: none;
+        font-size: 1.5rem;
+        padding: 0 0.5rem;
+      }
+
+      li a.delete {
+        font-size: 1.8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app">
+      <form v-on:submit.prevent="addTodo">
+        <div>
+          <label>
+            Todo:
+            <input type="text" v-model="todoInput" />
+          </label>
+        </div>
+
+        <input type="submit" value="Add todo" />
+      </form>
+
+      <ul>
+        <li v-for="(todo, key) in todos" v-bind:class="[{done: todo.isDone}, {star: todo.isStar}]">
+          <span v-on:click="toggleDone(key)">{{ todo.text }}</span>
+
+          <a href="#" v-on:click="toggleStar(key)">
+            <span v-if="todo.isStar">★</span>
+            <span v-else>☆</span>
+          </a>
+
+          <a href="#" v-on:click="deleteTodo(key)" class="delete">🗴</a>
+        </li>
+      </ul>
+    </main>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            todoInput: '',
+            count: 3,
+            todos: {
+              0: { text: 'eat apple', isDone: false, isStar: true },
+              1: { text: 'eat banana', isDone: false, isStar: false },
+              2: { text: 'study coding', isDone: true, isStar: false },
+            },
+          };
+        },
+        methods: {
+          addTodo() {
+            // add a new todo item
+            this.todos[this.count] = {
+              text: this.todoInput,
+              isDone: false,
+              isStar: false,
+            };
+            this.count++;
+
+            // clear the input
+            this.todoInput = '';
+          },
+          toggleDone(key) {
+            this.todos[key].isDone = !this.todos[key].isDone;
+          },
+          toggleStar(key) {
+            this.todos[key].isStar = !this.todos[key].isStar;
+          },
+          deleteTodo(key) {
+            delete this.todos[key];
+          },
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>
