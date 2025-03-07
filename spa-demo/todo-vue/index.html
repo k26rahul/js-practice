@@ -22,15 +22,17 @@
         user-select: none;
         line-height: 2rem;
         display: flex;
-        align-items: center;
+        justify-content: center;
       }
 
       li.done > span {
         text-decoration: line-through;
+        color: #555;
       }
 
       li.star {
         color: red;
+        text-shadow: 1px 1px yellow;
       }
 
       li a {
@@ -41,6 +43,7 @@
 
       li a.delete {
         font-size: 1.8rem;
+        transform: translateY(1px);
       }
     </style>
   </head>
@@ -96,15 +99,27 @@
 
             // clear the input
             this.todoInput = '';
+
+            this.saveTodos();
           },
           toggleDone(key) {
             this.todos[key].isDone = !this.todos[key].isDone;
+
+            this.saveTodos();
           },
           toggleStar(key) {
             this.todos[key].isStar = !this.todos[key].isStar;
+
+            this.saveTodos();
           },
           deleteTodo(key) {
             delete this.todos[key];
+
+            this.saveTodos();
+          },
+          saveTodos() {
+            localStorage.setItem('todos', this.todos);
+            localStorage.setItem('count', this.count);
           },
         },
       });
