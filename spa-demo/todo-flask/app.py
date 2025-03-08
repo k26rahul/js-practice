@@ -10,6 +10,8 @@ todos = [
     'smile'
 ]
 
+todos.append('some new todo i just appended')
+
 
 @app.route('/')
 def index():
