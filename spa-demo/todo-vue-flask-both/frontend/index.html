@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo Vue Flask Both</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <style>
+      li > a {
+        margin: 0 0.5rem;
+      }
+
+      span.done {
+        text-decoration: line-through;
+      }
+
+      span.star {
+        color: red;
+        text-shadow: 1px 1px yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Todo Vue Flask Both</h1>
+    <main id="app">
+      <p v-if="error">Something went wrong!</p>
+      <ul>
+        <li v-for="(todo, id) in todos">
+          <span
+            v-bind:class="[{done: todo.is_done}, {star: todo.is_star}]"
+            v-on:click="toggleDone(id)"
+            >{{ todo.text }}</span
+          >
+          <a href="#" v-on:click="toggleStar(id)">toggle star</a>
+          <a href="#" v-on:click="deleteTodo(id)">delete</a>
+        </li>
+      </ul>
+    </main>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            error: false,
+            todos: {},
+          };
+        },
+        methods: {
+          async toggleDone(id) {
+            fetch(`http://127.0.0.1:5000/api/toggle-done/${id}`)
+              .then(res => res.json())
+              .then(todos => {
+                this.todos = todos;
+              });
+          },
+          async toggleStar(id) {
+            fetch(`http://127.0.0.1:5000/api/toggle-star/${id}`)
+              .then(res => res.json())
+              .then(todos => {
+                this.todos = todos;
+              });
+          },
+          async deleteTodo(id) {
+            fetch(`http://127.0.0.1:5000/api/delete/${id}`)
+              .then(res => res.json())
+              .then(todos => {
+                this.todos = todos;
+              });
+          },
+        },
+        mounted() {
+          fetch('http://127.0.0.1:5000/api/get-todos')
+            .then(res => res.json())
+            .then(todos => {
+              this.todos = todos;
+            })
+            .catch(() => {
+              this.error = true;
+            });
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>
