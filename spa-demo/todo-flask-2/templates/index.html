@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask Todo 2.0</title>
+    <style>
+      form {
+        width: fit-content;
+        margin: auto;
+        padding: 1rem;
+        border: 2px solid #333;
+      }
+
+      form > div {
+        margin-bottom: 10px;
+      }
+
+      li > span {
+        margin-right: 2rem;
+      }
+
+      li a {
+        margin-right: 5px;
+      }
+
+      li.done > span {
+        text-decoration: line-through;
+      }
+
+      li.star > span {
+        color: red;
+        text-shadow: 1px 1px yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <form action="/add-todo" method="post">
+        <div>
+          <label>
+            Todo:
+            <input type="text" name="todo" />
+          </label>
+        </div>
+        <div>
+          <input type="submit" value="Add todo" />
+        </div>
+      </form>
+
+      <ul>
+        {% for id, todo in todos.items() %}
+        <li class="{% if todo.isDone %} done {% endif %} {% if todo.isStar %} star {% endif %}">
+          <span>{{ todo.text }}</span>
+          <a href="/toggle-done/{{id}}">
+            {% if todo.isDone %} mark not done {% else %} mark as done {% endif %}
+          </a>
+          <a href="/toggle-star/{{id}}">
+            {% if todo.isStar %} unstar {% else %} star {% endif %}
+          </a>
+          <a href="/delete/{{id}}">delete</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </main>
+  </body>
+</html>

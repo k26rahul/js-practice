@@ -79,23 +79,23 @@
         data() {
           return {
             todoInput: '',
-            count: 3,
-            todos: {
+            todos: JSON.parse(localStorage.getItem('todos')) || {
               0: { text: 'eat apple', isDone: false, isStar: true },
               1: { text: 'eat banana', isDone: false, isStar: false },
               2: { text: 'study coding', isDone: true, isStar: false },
             },
+            nextTodoId: localStorage.getItem('nextTodoId') || 3,
           };
         },
         methods: {
           addTodo() {
             // add a new todo item
-            this.todos[this.count] = {
+            this.todos[this.nextTodoId] = {
               text: this.todoInput,
               isDone: false,
               isStar: false,
             };
-            this.count++;
+            this.nextTodoId++;
 
             // clear the input
             this.todoInput = '';
@@ -104,22 +104,19 @@
           },
           toggleDone(key) {
             this.todos[key].isDone = !this.todos[key].isDone;
-
             this.saveTodos();
           },
           toggleStar(key) {
             this.todos[key].isStar = !this.todos[key].isStar;
-
             this.saveTodos();
           },
           deleteTodo(key) {
             delete this.todos[key];
-
             this.saveTodos();
           },
           saveTodos() {
-            localStorage.setItem('todos', this.todos);
-            localStorage.setItem('count', this.count);
+            localStorage.setItem('todos', JSON.stringify(this.todos));
+            localStorage.setItem('nextTodoId', this.nextTodoId);
           },
         },
       });
