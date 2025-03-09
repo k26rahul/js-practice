@@ -9,6 +9,7 @@ todos = {
     1: {"text": "go to the moon", "is_done": False, "is_star": False},
     2: {"text": "wake up at 7am", "is_done": False, "is_star": False},
 }
+next_todo_id = 3
 
 
 @app.route('/')
@@ -24,18 +25,27 @@ def get_todos():
 @app.route('/api/toggle-done/<int:id>')
 def toggle_done(id):
   todos[id]['is_done'] = not todos[id]['is_done']
-  return jsonify(todos)
+  return jsonify(todos[id])
 
 
 @app.route('/api/toggle-star/<int:id>')
 def toggle_star(id):
   todos[id]['is_star'] = not todos[id]['is_star']
-  return jsonify(todos)
+  return jsonify(todos[id])
 
 
 @app.route('/api/delete/<int:id>')
 def delete(id):
   del todos[id]
+  return jsonify(todos)
+
+
+@app.route('/api/add-todo', methods=['POST'])
+def add_todo():
+  global next_todo_id
+  todo = request.form.get('todo')
+  todos[next_todo_id] = {"text": todo, "is_done": True, "is_star": True}
+  next_todo_id += 1
   return jsonify(todos)
 
 

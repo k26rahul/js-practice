@@ -6,6 +6,35 @@
     <title>Todo Vue Flask Both</title>
     <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
     <style>
+      form {
+        width: fit-content;
+        margin: auto;
+        padding: 1rem;
+        border: 2px solid #333;
+      }
+
+      form > div {
+        margin-bottom: 10px;
+      }
+
+      form input {
+        padding: 2px;
+        font-size: 1.25rem;
+      }
+
+      form button {
+        color: white;
+        background-color: darkslateblue;
+        padding: 0.4rem 0.8rem;
+        border: none;
+        cursor: pointer;
+      }
+
+      li {
+        user-select: none;
+        cursor: pointer;
+      }
+
       li > a {
         margin: 0 0.5rem;
       }
@@ -21,9 +50,23 @@
     </style>
   </head>
   <body>
-    <h1>Todo Vue Flask Both</h1>
     <main id="app">
-      <p v-if="error">Something went wrong!</p>
+      <h1>Todo Vue Flask Both</h1>
+
+      <form v-on:submit.prevent="addTodo">
+        <div>
+          <label>
+            Todo:
+            <input type="text" v-model="todoInput" />
+          </label>
+        </div>
+
+        <div>
+          <button>Add todo</button>
+        </div>
+      </form>
+
+      <p v-if="errorFlag">Something went wrong! Please refresh 🙏</p>
       <ul>
         <li v-for="(todo, id) in todos">
           <span
@@ -40,42 +83,47 @@
       const app = Vue.createApp({
         data() {
           return {
-            error: false,
+            errorFlag: false,
             todos: {},
+            todoInput: '',
           };
         },
         methods: {
+          async betterFetch(url, config = {}) {
+            try {
+              let res = await fetch(url, config);
+              let data = await res.json();
+              return data;
+            } catch {
+              this.errorFlag = true;
+            }
+          },
           async toggleDone(id) {
-            fetch(`http://127.0.0.1:5000/api/toggle-done/${id}`)
-              .then(res => res.json())
-              .then(todos => {
-                this.todos = todos;
-              });
+            let todo = await this.betterFetch(`http://127.0.0.1:5000/api/toggle-done/${id}`);
+            this.todos[id] = todo;
           },
           async toggleStar(id) {
-            fetch(`http://127.0.0.1:5000/api/toggle-star/${id}`)
-              .then(res => res.json())
-              .then(todos => {
-                this.todos = todos;
-              });
+            let todo = await this.betterFetch(`http://127.0.0.1:5000/api/toggle-star/${id}`);
+            this.todos[id] = todo;
           },
           async deleteTodo(id) {
-            fetch(`http://127.0.0.1:5000/api/delete/${id}`)
-              .then(res => res.json())
-              .then(todos => {
-                this.todos = todos;
-              });
+            let todos = await this.betterFetch(`http://127.0.0.1:5000/api/delete/${id}`);
+            this.todos = todos;
+          },
+          async addTodo() {
+            let formData = new FormData();
+            formData.append('todo', this.todoInput);
+
+            let todos = await this.betterFetch('http://127.0.0.1:5000/api/add-todo', {
+              method: 'POST',
+              body: formData,
+            });
+            this.todos = todos;
           },
         },
-        mounted() {
-          fetch('http://127.0.0.1:5000/api/get-todos')
-            .then(res => res.json())
-            .then(todos => {
-              this.todos = todos;
-            })
-            .catch(() => {
-              this.error = true;
-            });
+        async mounted() {
+          let todos = await this.betterFetch('http://127.0.0.1:5000/api/get-todos');
+          this.todos = todos;
         },
       });
       app.mount('#app');
