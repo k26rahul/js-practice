@@ -68,14 +68,14 @@
 
       <p v-if="errorFlag">Something went wrong! Please refresh 🙏</p>
       <ul>
-        <li v-for="(todo, id) in todos">
+        <li v-for="todo in todos">
           <span
             v-bind:class="[{done: todo.is_done}, {star: todo.is_star}]"
-            v-on:click="toggleDone(id)"
+            v-on:click="toggleDone(todo.id)"
             >{{ todo.text }}</span
           >
-          <a href="#" v-on:click="toggleStar(id)">toggle star</a>
-          <a href="#" v-on:click="deleteTodo(id)">delete</a>
+          <a href="#" v-on:click="toggleStar(todo.id)">toggle star</a>
+          <a href="#" v-on:click="deleteTodo(todo.id)">delete</a>
         </li>
       </ul>
     </main>
@@ -83,9 +83,9 @@
       const app = Vue.createApp({
         data() {
           return {
-            errorFlag: false,
-            todos: {},
+            todos: [],
             todoInput: '',
+            errorFlag: false,
           };
         },
         methods: {
@@ -99,12 +99,12 @@
             }
           },
           async toggleDone(id) {
-            let todo = await this.betterFetch(`http://127.0.0.1:5000/api/toggle-done/${id}`);
-            this.todos[id] = todo;
+            let todos = await this.betterFetch(`http://127.0.0.1:5000/api/toggle-done/${id}`);
+            this.todos = todos;
           },
           async toggleStar(id) {
-            let todo = await this.betterFetch(`http://127.0.0.1:5000/api/toggle-star/${id}`);
-            this.todos[id] = todo;
+            let todos = await this.betterFetch(`http://127.0.0.1:5000/api/toggle-star/${id}`);
+            this.todos = todos;
           },
           async deleteTodo(id) {
             let todos = await this.betterFetch(`http://127.0.0.1:5000/api/delete/${id}`);
@@ -112,8 +112,7 @@
           },
           async addTodo() {
             let formData = new FormData();
-            formData.append('todo', this.todoInput);
-
+            formData.append('todoInput', this.todoInput);
             let todos = await this.betterFetch('http://127.0.0.1:5000/api/add-todo', {
               method: 'POST',
               body: formData,

@@ -1,15 +1,16 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from flask_cors import CORS
+from models import db, Todo
+from utils import better_jsonify
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///demo.db'
+
 CORS(app)
 
-todos = {
-    0: {"text": "eat apple", "is_done": True, "is_star": True},
-    1: {"text": "go to the moon", "is_done": False, "is_star": False},
-    2: {"text": "wake up at 7am", "is_done": False, "is_star": False},
-}
-next_todo_id = 3
+db.init_app(app)
+with app.app_context():
+  db.create_all()
 
 
 @app.route('/')
@@ -19,34 +20,39 @@ def index():
 
 @app.route('/api/get-todos')
 def get_todos():
-  return jsonify(todos)
+  return better_jsonify(Todo.query.all())
 
 
 @app.route('/api/toggle-done/<int:id>')
 def toggle_done(id):
-  todos[id]['is_done'] = not todos[id]['is_done']
-  return jsonify(todos[id])
+  todo = Todo.query.get(id)
+  todo.is_done = not todo.is_done
+  db.session.commit()
+  return better_jsonify(Todo.query.all())
 
 
 @app.route('/api/toggle-star/<int:id>')
 def toggle_star(id):
-  todos[id]['is_star'] = not todos[id]['is_star']
-  return jsonify(todos[id])
+  todo = Todo.query.get(id)
+  todo.is_star = not todo.is_star
+  db.session.commit()
+  return better_jsonify(Todo.query.all())
 
 
 @app.route('/api/delete/<int:id>')
 def delete(id):
-  del todos[id]
-  return jsonify(todos)
+  todo = Todo.query.get(id)
+  db.session.delete(todo)
+  db.session.commit()
+  return better_jsonify(Todo.query.all())
 
 
 @app.route('/api/add-todo', methods=['POST'])
 def add_todo():
-  global next_todo_id
-  todo = request.form.get('todo')
-  todos[next_todo_id] = {"text": todo, "is_done": True, "is_star": True}
-  next_todo_id += 1
-  return jsonify(todos)
+  todo_input = request.form.get('todoInput')
+  db.session.add(Todo(text=todo_input))
+  db.session.commit()
+  return better_jsonify(Todo.query.all())
 
 
 app.run(debug=True)
