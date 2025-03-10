@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <main id="app">
+      <h1>playing with vue components</h1>
+      <p>my salary is {{salary}}</p>
+      <my-para></my-para>
+      <my-para></my-para>
+      <my-para></my-para>
+      <my-para></my-para>
+    </main>
+
+    <script>
+      let MyPara = {
+        data() {
+          return {
+            vibe: 'hot',
+            score: 0,
+          };
+        },
+        template: `
+        <div style="border: 1px solid red">
+          <p style="color: seagreen">i am a {{vibe}} green text, score is {{score}}</p>
+          <button @click="vibe = 'dull'">change vibe</button>
+          <button @click="score++">+1 score</button>
+        </div>
+        `,
+      };
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            salary: 10000,
+          };
+        },
+        methods: {},
+        components: {
+          'my-para': MyPara,
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

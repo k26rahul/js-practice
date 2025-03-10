@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <main id="app">
+      <h1>playing with vue components</h1>
+      <p>my salary is {{salary}}</p>
+      <my-card emoji="💚" tagline="green hearts are best"></my-card>
+      <my-card emoji="😍" tagline="look in my eyes"></my-card>
+      <my-card emoji="🤍" tagline="i am happy white heart"></my-card>
+    </main>
+
+    <script>
+      let MyCard = {
+        props: ['emoji', 'tagline'],
+        template: `
+           <div style='border: 1px solid red; margin: 10px'>
+             <p>emoji is {{emoji}}</p>
+             <p>{{tagline}}</p>
+           </div>
+        `,
+      };
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            salary: 10000,
+          };
+        },
+        components: {
+          'my-card': MyCard,
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

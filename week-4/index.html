@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <main id="app">
+      <h1>playing with vue components</h1>
+      <p>my salary is {{salary}}</p>
+      <cool-banner>
+        <template #painting>
+          <img src="https://placecats.com/300/200" alt="cat pic" />
+          <p>this is img caption</p>
+        </template>
+
+        <template #main>
+          <p>this is main content start</p>
+          <p>i am a child between open/close tags of cool banner</p>
+          <p>this is main content end!!! 💣</p>
+        </template>
+
+        <h4>this is h4, POOR BABY IN DEF SLOT</h4>
+        <p>brother of h4, this too poor</p>
+      </cool-banner>
+    </main>
+
+    <template id="cool-banner-template">
+      <slot></slot>
+      <p>above is the DEFAULT SLOT (poor guys)</p>
+
+      <div style="border: 5px solid darkslateblue">
+        <p style="font-size: 2rem; font-style: italic">this is a cool banner, in happy html</p>
+
+        <slot name="painting"></slot>
+        <p>above is the PAINTING SLOT</p>
+
+        <slot name="main"></slot>
+        <p>above is the MAIN SLOT</p>
+      </div>
+    </template>
+
+    <template id="my-card-templates">
+      <p>this is a happy cool card</p>
+      <slot name="primary"></slot>
+      <slot name="secondary"></slot>
+    </template>
+
+    <script>
+      let CoolBanner = {
+        template: document.querySelector('#cool-banner-template').innerHTML,
+      };
+
+      let MyCard = {
+        template: document.querySelector('#my-card-template').innerHTML,
+      };
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            salary: 10000,
+          };
+        },
+        components: {
+          'cool-banner': CoolBanner,
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

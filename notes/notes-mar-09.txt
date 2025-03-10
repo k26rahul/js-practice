@@ -1,0 +1,88 @@
+components: {
+  "my-card": MyCard
+}
+
+to define a component, is to define its config
+  that config is same app config, it has data(), template, methods, computed etc
+
+inside config: props: ['emoji', 'tagline']
+  define what attributes are supported on your components
+  <my-card emoji="😍" tagline="look in my eyes"></my-card>
+
+slots: are like container for children of your component
+  stuff between open/close tags of your component, where it goes?
+  A. default slot: <slot></slot>
+        anything without #slot-names goes in here
+
+  B. named slot: <slot name="painting"></slot>
+        with #slot-name goes in their respective slots
+        e.g. <template #painting>, <template #main>
+
+class Todo(db.Model, SerializerMixin)
+
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from flask_sqlalchemy import SQLAlchemy
+
+db.session.add(db object)
+db.session.delete(db object)
+db.session.commit()
+
+to update User.name:
+  user = User.query.filter_by(id = 5).first()
+  user.name = 'rahul'
+  db.session.commit()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///demo.db'
+
+db.init_app(app)
+with app.app_context():
+  db.create_all()
+
+let res = await fetch(some url)
+let data = await res.json()
+console.log(data)
+
+let formData = new FormData()
+formData.append(name, value)
+formData.append('todo_text', 'eat apple')
+formData.append('salary', 10000)
+formData.append('message', 'hello vidu, this is a great day, lets do best')
+
+fetch(some url, config)
+fetch(some url, {
+  method: 'POST',
+  body: formData
+})
+
+v-for='elem in array'
+v-for='(elem, index) in array'
+
+v-for='value in object'
+v-for='(value, key) in object'
+
+v-model='some data var'
+  input value automatically saved in that data var
+  also, if you modify that data var, it also reflects in input
+  it's called `two way binding`
+
+v-on:click='method' // don't call it yourself
+v-on:click='method(param)' // call it, if you need supply args
+
+form:
+  v-on:submit.prevent='method'
+    we do `.prevent` to prevent reloading the page
+
+json:
+  key : value
+
+sqlalchemy db objects:
+  cannot directly converted to json
+  so jsonify(todo) FAILS
+  but better_jsonify(todo) WORKS
+
+better_jsonify:
+  my custom utility
+  it does: db_obj.to_dict()
+  also if you give it array:
+    [db_obj.to_dict() for db_obj in array]
+
