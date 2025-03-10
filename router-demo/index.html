@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Router Demo</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4.5.0/dist/vue-router.global.js"></script>
+    <style>
+      a {
+        margin: 0 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app">
+      <nav>
+        <a href="#/">Home</a>
+        <a href="#/about">About</a>
+      </nav>
+
+      <router-view></router-view>
+    </main>
+
+    <template id="home-template">
+      <h1>this is home page</h1>
+      <p>welcome to my website</p>
+    </template>
+
+    <template id="about-template">
+      <h1>this is about page</h1>
+      <p>i am a cool boy, i do coding</p>
+    </template>
+
+    <script>
+      const Home = {
+        template: document.querySelector('#home-template').innerHTML,
+      };
+
+      const About = {
+        template: document.querySelector('#about-template').innerHTML,
+      };
+
+      const routes = [
+        { path: '/', component: Home },
+        { path: '/about', component: About },
+      ];
+
+      const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
+        routes,
+      });
+
+      const app = Vue.createApp({});
+      app.use(router);
+      app.mount('#app');
+    </script>
+  </body>
+</html>
