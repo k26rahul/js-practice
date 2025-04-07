@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat app</title>
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <main id="app">
+      <form @submit.prevent="handleFormSubmit">
+        <div>
+          <label>
+            Message:
+            <input type="text" v-model="message" />
+          </label>
+        </div>
+      </form>
+
+      <ul>
+        <li v-for="message in allMessages">{{message.body}}</li>
+      </ul>
+    </main>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: '',
+            allMessages: [],
+          };
+        },
+
+        created() {
+          this.fetchAllMessages();
+          setInterval(this.fetchAllMessages, 1000);
+        },
+
+        methods: {
+          async fetchAllMessages() {
+            console.log('fetching all messages...');
+            const res = await fetch('http://127.0.0.1:5000/get-all-messages');
+            const data = await res.json();
+            this.allMessages = data.messages;
+          },
+
+          async handleFormSubmit() {
+            console.log(`sending message: ${this.message}`);
+            const res = await fetch('http://127.0.0.1:5000/send', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                message: this.message,
+              }),
+            });
+            const data = await res.json();
+            console.log('server said:', data);
+            this.fetchAllMessages();
+          },
+        },
+      });
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

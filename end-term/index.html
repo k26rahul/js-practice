@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // let student1 = {
+      //   name: 'vidu',
+      //   age: 20,
+      //   salary: 10000,
+      //   printInfo() {
+      //     console.log(`my name is ${this.name}, my age is ${this.age}`);
+      //   },
+      //   printIncome() {
+      //     let bonus = this.age * 10;
+      //     console.log(`my income is ${this.salary + bonus}`);
+      //   },
+      // };
+
+      // student1.printInfo();
+      // student1.printIncome();
+      // console.log(student1);
+
+      // function Student(name, age, salary) {
+      //   this.name = name;
+      //   this.age = age;
+      //   this.salary = salary;
+      //   return this;
+      // }
+
+      // Student.prototype.printInfo = function printInfo() {
+      //   console.log(`my name is ${this.name}, my age is ${this.age}`);
+      // };
+
+      // Student.prototype.printIncome = function printIncome() {
+      //   let bonus = this.age * 10;
+      //   console.log(`my income is ${this.salary + bonus}`);
+      // };
+
+      // let student1 = new Student('vidu', 20, 10000);
+      // student1.printInfo();
+      // student1.printIncome();
+
+      class Student {
+        constructor(name, age, salary) {
+          this.name = name;
+          this.age = age;
+          this.salary = salary;
+          // this.sayHello = 'HELLO-HI-HEY';
+        }
+
+        printInfo() {
+          console.log(`my name is ${this.name}, my age is ${this.age}`);
+        }
+
+        printIncome() {
+          let bonus = this.age * 10;
+          console.log(`my income is ${this.salary + bonus}`);
+        }
+      }
+
+      Student.prototype.sayHello = function sayHello() {
+        console.log(`hi i am ${this.name}, i do doom doom, nice to meet u`);
+      };
+
+      let student1 = new Student('vidu', 20);
+      let student2 = new Student('muskan', 22);
+
+      // student1.printInfo();
+      // student2.printInfo();
+
+      // delete Student.prototype.sayHello;
+      // delete student1.__proto__.sayHello;
+      student1.sayHello();
+    </script>
+  </body>
+</html>
