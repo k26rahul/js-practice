@@ -7,6 +7,98 @@
   </head>
   <body>
     <script>
+      class Student {
+        constructor(name, age, salary, study) {
+          this.name = name; // instance properties
+          this.age = age; // instance properties
+          this.salary = salary; // instance properties
+          this.study = study; // instance properties
+        }
+        printInfo() {
+          console.log(`I am ${this.name}, I study ${this.study.toUpperCase()}`);
+        }
+      }
+
+      student1 = new Student('vidu', 20, 10000, 'bs');
+      student2 = new Student('vishnu', 9, 7000, '4');
+      student3 = new Student('paru', 15, 9000, '10');
+
+      console.log(student1);
+      console.log(student2);
+      console.log(student3);
+
+      student1.printInfo();
+
+      // function Student(name, age, salary, study) {
+      //   this.name = name; // instance properties
+      //   this.age = age; // instance properties
+      //   this.salary = salary; // instance properties
+      //   this.study = study; // instance properties
+
+      //   // instance method
+      //   // this.printInfo = function printInfo() {
+      //   //   console.log(`DOOM DOOM! DOOM DOOM!`);
+      //   // };
+      // }
+
+      // Student.prototype.printInfo = function printInfo() {
+      //   console.log(`I am ${this.name}, I study ${this.study.toUpperCase()}`);
+      // };
+
+      // student1 = new Student('vidu', 20, 10000, 'bs');
+      // student2 = new Student('vishnu', 9, 7000, '4');
+      // student3 = new Student('paru', 15, 9000, '10');
+
+      // console.log(student1);
+      // console.log(student2);
+      // console.log(student3);
+
+      // Student.prototype.subject = 'social science & humanities';
+
+      // delete student1.subject;
+      // console.log(student1.subject);
+
+      // delete student1.printInfo; // delete instance methods/properties
+      // delete Student.prototype.printInfo; // delete method from prototype
+      // student2.printInfo();
+      // student3.printInfo();
+      // student1.printInfo();
+
+      // let student1 = {
+      //   name: 'vidu',
+      //   age: 20,
+      //   salary: 10000,
+      //   study: 'bs',
+      //   printInfo() {
+      //     console.log(`I am ${this.name}, I study ${this.study.toUpperCase()}`);
+      //   },
+      // };
+
+      // let student2 = {
+      //   name: 'vishnu',
+      //   age: 9,
+      //   salary: 7000,
+      //   study: '4',
+      //   marks: 100,
+      //   printInfo() {
+      //     console.log(`My name is ${this.name}, I got ${this.marks} marks`);
+      //   },
+      // };
+
+      // console.log(student1);
+      // student1.printInfo();
+
+      // console.log(student2);
+      // student2.printInfo();
+
+      // console.log(student); // whole object
+      // console.log(student.salary); // salary
+      // console.log(student['salary']); // salary
+      // console.log(Object.keys(student)); // k
+      // console.log(Object.values(student)); // v
+      // console.log(Object.entries(student)); // [k, v]
+      // console.log(student.__proto__ === Object.prototype); // type/class of object
+
       // let student1 = {
       //   name: 'vidu',
       //   age: 20,
@@ -44,37 +136,37 @@
       // student1.printInfo();
       // student1.printIncome();
 
-      class Student {
-        constructor(name, age, salary) {
-          this.name = name;
-          this.age = age;
-          this.salary = salary;
-          // this.sayHello = 'HELLO-HI-HEY';
-        }
+      // class Student {
+      //   constructor(name, age, salary) {
+      //     this.name = name;
+      //     this.age = age;
+      //     this.salary = salary;
+      //     // this.sayHello = 'HELLO-HI-HEY';
+      //   }
 
-        printInfo() {
-          console.log(`my name is ${this.name}, my age is ${this.age}`);
-        }
+      //   printInfo() {
+      //     console.log(`my name is ${this.name}, my age is ${this.age}`);
+      //   }
 
-        printIncome() {
-          let bonus = this.age * 10;
-          console.log(`my income is ${this.salary + bonus}`);
-        }
-      }
+      //   printIncome() {
+      //     let bonus = this.age * 10;
+      //     console.log(`my income is ${this.salary + bonus}`);
+      //   }
+      // }
 
-      Student.prototype.sayHello = function sayHello() {
-        console.log(`hi i am ${this.name}, i do doom doom, nice to meet u`);
-      };
+      // Student.prototype.sayHello = function sayHello() {
+      //   console.log(`hi i am ${this.name}, i do doom doom, nice to meet u`);
+      // };
 
-      let student1 = new Student('vidu', 20);
-      let student2 = new Student('muskan', 22);
+      // let student1 = new Student('vidu', 20);
+      // let student2 = new Student('muskan', 22);
 
       // student1.printInfo();
       // student2.printInfo();
 
       // delete Student.prototype.sayHello;
       // delete student1.__proto__.sayHello;
-      student1.sayHello();
+      // student1.sayHello();
     </script>
   </body>
 </html>
