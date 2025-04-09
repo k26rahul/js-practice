@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+  </head>
+  <body>
+    <main id="app">
+      <h1>Calculate simple interest</h1>
+
+      <form>
+        <div>
+          <label>
+            Principal
+            <input type="number" v-model:number="principal" />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Annual Rate
+            <input type="number" v-model:number="rate" />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Time (in years)
+            <input type="number" v-model:number="time" />
+          </label>
+        </div>
+      </form>
+
+      <h1>Your final amount is {{finalAmount}}</h1>
+
+      <button @click="discount">Discount</button>
+    </main>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          principal: 0,
+          rate: 0,
+          time: 0,
+        },
+        computed: {
+          finalAmount() {
+            return this.principal * (1 + this.rate * this.time);
+          },
+
+          // finalAmount: {
+          //   get() {
+          //     return this.principal * (1 + this.rate * this.time);
+          //   },
+          //   set(value) {
+          //     console.log(value);
+          //   },
+          // },
+        },
+        methods: {
+          discount() {
+            this.finalAmount -= this.finalAmount * 0.1;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

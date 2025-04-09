@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+  </head>
+  <body>
+    <main id="app">
+      <my-button @click="handleClick">
+        Good cat, click me
+        <img src="https://placecats.com/300/200" alt="cat img" />
+      </my-button>
+    </main>
+
+    <script>
+      Vue.component('my-button', {
+        template: `<button @click="handleClick"><slot></slot></button>`,
+        methods: {
+          handleClick() {
+            console.log('clicked on button');
+          },
+        },
+        mounted() {
+          console.log('my-button component is mounted');
+          setTimeout(() => {
+            this.$emit('click');
+          }, 2000);
+        },
+      });
+
+      new Vue({
+        el: '#app',
+        methods: {
+          handleClick() {
+            console.log('clicked on my-button (conceptually)');
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

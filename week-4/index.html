@@ -11,7 +11,7 @@
       <h1>playing with vue components</h1>
       <p>my salary is {{salary}}</p>
       <cool-banner>
-        <template #painting>
+        <template v-slot:painting>
           <img src="https://placecats.com/300/200" alt="cat pic" />
           <p>this is img caption</p>
         </template>
@@ -42,19 +42,9 @@
       </div>
     </template>
 
-    <template id="my-card-templates">
-      <p>this is a happy cool card</p>
-      <slot name="primary"></slot>
-      <slot name="secondary"></slot>
-    </template>
-
     <script>
       let CoolBanner = {
         template: document.querySelector('#cool-banner-template').innerHTML,
-      };
-
-      let MyCard = {
-        template: document.querySelector('#my-card-template').innerHTML,
       };
 
       const app = Vue.createApp({

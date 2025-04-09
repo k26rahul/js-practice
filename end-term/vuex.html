@@ -10,64 +10,34 @@
   <body>
     <main id="app">
       <h1>My salary is {{salary}}</h1>
-
       <button @click="increment">Increment Salary</button>
-
-      <my-celebration></my-celebration>
-      <my-doctor></my-doctor>
     </main>
 
     <script>
-      // all data is stored in `store` here, not in individual components
       const store = new Vuex.Store({
         state: {
           salary: 10000,
-          cakeCount: 0,
         },
         mutations: {
-          incrementSalary(state, num) {
-            state.salary += num;
-            state.cakeCount += 100;
+          incrementSalary(state, payload = 1) {
+            state.salary += payload;
           },
-          eatCake(state) {
-            state.cakeCount++;
+        },
+        actions: {
+          // args: 1. store like thing, 2. payload
+          async doSomething({ state, commit, dispatch }, payload) {
+            await new Promise(resolve => {
+              setTimeout(() => {
+                resolve();
+              }, 2000);
+            });
+            // state.salary += payload; // bad practice, do mutations only through committing
+            commit('incrementSalary', payload);
           },
         },
       });
 
-      const Celebration = {
-        template: `
-          <div>
-            <p>I will spend {{salary}} to celebrate, doom doom!</p>
-            <p>I ate {{cakeCount}} cakes</p>
-            <button @click="eat">Eat Cake</button>
-          </div>
-        `,
-        computed: {
-          salary() {
-            return store.state.salary;
-          },
-          cakeCount() {
-            return store.state.cakeCount;
-          },
-        },
-        methods: {
-          eat() {
-            store.commit('eatCake');
-          },
-        },
-      };
-
-      const Doctor = {
-        template: `<p>OMG, You ate {{cakeCount}} cakes? That's bad for health.</p>`,
-        computed: {
-          cakeCount() {
-            return store.state.cakeCount;
-          },
-        },
-      };
-
-      const app = new Vue({
+      new Vue({
         el: '#app',
         store,
         computed: {
@@ -77,13 +47,17 @@
         },
         methods: {
           increment() {
-            store.commit('incrementSalary', 15);
+            // store.commit('incrementSalary');
+            store.dispatch('doSomething', 15);
           },
         },
-        components: {
-          'my-celebration': Celebration,
-          'my-doctor': Doctor,
-        },
+        // watch: {
+        //   user: {
+        //     handler(n, o) {},
+        //     deep: true,
+        //   },
+        //   salary(n, o) {},
+        // },
       });
     </script>
   </body>
