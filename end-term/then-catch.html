@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function getNumber() {
+        // return 5;
+        throw new Error('cannot find your fav number');
+      }
+
+      getNumber()
+        .then(
+          myNum => {
+            console.log(myNum);
+          },
+          error => {
+            console.log('caught in .then()');
+            console.log(`oops, error happened: ${error.message}`);
+          }
+        )
+        .catch(error => {
+          console.log('caught in .catch()');
+          console.log(`oops, error happened: ${error.message}`);
+        });
+    </script>
+  </body>
+</html>

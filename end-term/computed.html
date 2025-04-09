@@ -47,22 +47,22 @@
           time: 0,
         },
         computed: {
-          finalAmount() {
-            return this.principal * (1 + this.rate * this.time);
-          },
-
-          // finalAmount: {
-          //   get() {
-          //     return this.principal * (1 + this.rate * this.time);
-          //   },
-          //   set(value) {
-          //     console.log(value);
-          //   },
+          // finalAmount() {
+          //   return this.principal * (1 + this.rate * this.time);
           // },
+
+          finalAmount: {
+            get() {
+              return this.principal * (1 + this.rate * this.time);
+            },
+            set(value) {
+              console.log(value);
+            },
+          },
         },
         methods: {
           discount() {
-            this.finalAmount -= this.finalAmount * 0.1;
+            this.finalAmount = 87;
           },
         },
       });

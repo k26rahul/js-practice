@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // window.salary = 99;
+      var salary = 87; // sets window.salary = 87
+
+      let student = {
+        name: 'vidu',
+        age: 55,
+        salary: 5000,
+        arrowPrintInfo: () => {
+          console.log(this.salary); // window's salary prop
+        },
+        normalPrintInfo: function () {
+          console.log(this.salary); // student's salary prop
+        },
+      };
+
+      student.arrowPrintInfo(); // this = window
+      student.normalPrintInfo(); // this = student obj
+    </script>
+  </body>
+</html>
