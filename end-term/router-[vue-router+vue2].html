@@ -17,6 +17,8 @@
       <nav>
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
+        <router-link to="/user/15">User 15 Profile</router-link>
+        <router-link to="/user/20">User 20 Profile</router-link>
       </nav>
 
       <router-view></router-view>
@@ -36,6 +38,13 @@
       </div>
     </template>
 
+    <template id="user-profile-template">
+      <div>
+        <h1>This is User Profile</h1>
+        <p>You are {{doomDoom}}</p>
+      </div>
+    </template>
+
     <script>
       const Home = {
         template: document.getElementById('home-template').innerHTML,
@@ -43,6 +52,15 @@
 
       const About = {
         template: document.getElementById('about-template').innerHTML,
+      };
+
+      const UserProfile = {
+        template: document.getElementById('user-profile-template').innerHTML,
+        computed: {
+          doomDoom() {
+            return this.$route.params.id;
+          },
+        },
       };
 
       const routes = [
@@ -53,6 +71,10 @@
         {
           path: '/about',
           component: About,
+        },
+        {
+          path: '/user/:id',
+          component: UserProfile,
         },
       ];
 
