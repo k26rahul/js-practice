@@ -1,0 +1,216 @@
+hof: a function that takes/returns another function ~ closure
+closure: can access vars of outer function
+
+Promise.resolve() resolves, then setTimeout(0) comes
+
+john = new Person()
+delete john.greet // deleting instance property
+delete Person.prototype.greet // delete class property
+
+obj.property
+1. search for property in instance properties
+2. search for property in class prototype
+
+vue:
+data: {
+  user: {
+    name: vidu, age: 22
+  }
+}
+watch: {
+  user() {},
+  user: {
+    handler() {},
+    deep: true // watch nested properties too
+  }
+}
+computed: {
+  likes() {},
+  likes: {
+    get() {},
+    set() {}
+  }
+}
+
+cookies:
+secure=True // allow only https(secure) access
+samesite=Strict // don't allow cross site
+samesite=None // allow cross site
+
+localStorage.getItem(key)
+localStorage.setItem(key, value)
+
+when storing objects in ls: JSON.stringify before setItem
+i.e. localStorage.setItem(key, JSON.stringify(value))
+
+when retrieving objects from ls: JSON.parse after getItem
+i.e. JSON.parse(localStorage.getItem(key))
+
+because ls supports only strings, not objects
+so u have to manually do string <-> object when getItem/setItem
+
+polling:
+1. regular: fixed interval, send a req, ask for new data
+2. long polling: send a req, wait until new data arrives, then response is provided
+
+vuex:
+store = Vuex.Store({
+  state: {},
+
+  // commit('increment')
+  mutations: {
+    increment(state, payload) {
+      // make changes in state
+      // cannot do async stuff, for that use actions
+    }
+  },
+
+  // dispatch('doSomething')
+  actions: {
+    doSomething({state, commit, dispatch}, payload) {
+      // can do async stuff here, then call commit/actions
+    }
+  }
+})
+
+raw sql queries, possible mistakes:
+1. sql injection /api/user/1 OR 1==1
+2. no auth check
+3. un-validated user input
+
+custom elements (CE) slots:
+
+inside CE tem:
+    <slot :info='info' name='header'>
+
+in app, using that CE:
+    <template v-slot:header='{info}'> {{info.title}} </template>
+
+@cache.memoize() // cache according to `n`
+very_complex_fn(n)
+
+    very_complex_fn(5) // cache miss
+    very_complex_fn(5) // cache hit
+    very_complex_fn(5) // cache hit
+    very_complex_fn(7) // cache miss
+    very_complex_fn(7) // cache hit
+    very_complex_fn(5) // cache hit
+    very_complex_fn(10) // cache miss
+    very_complex_fn(10) // cache hit
+    very_complex_fn(5) // cache hit
+    very_complex_fn(7) // cache hit
+    very_complex_fn(12) // cache miss
+
+@cache.cached() // cache result once, not matter `n`
+very_complex_fn(n)
+
+    very_complex_fn(5) // cache miss
+    very_complex_fn(5) // cache hit
+    very_complex_fn(7) // cache hit
+    very_complex_fn(10) // cache hit
+    very_complex_fn(11) // cache hit
+
+typeof(value): 
+number, string, boolean
+arrays, null: object
+10, 10.2: number
+NaN: number
+undefined: undefined
+
+detaching methods from objects: there is no dot (.) when u call the method
+methods lose `this` context
+i.e:
+    greet = obj.greet
+    greet() // (this = window)
+    obj.greet() // (this = obj)
+
+greet = obj.greet
+boundGreet = greet.bind(obj) // method is bound to obj
+boundGreet() // (this = obj)
+
+boundFn = fn.bind(context, ...args)
+boundFn()
+
+fn.call(context, ...args) // fn runs immediately
+fn.apply(context, args) // fn runs immediately
+
+vue lifecycle hooks:
+created() // data, props are ready, DOM is not ready
+mounted() // DOM is ready
+updated() // did some changes in DOM
+destroyed() // DOM is destroyed
+
+before<hook> is available too.
+e.g. beforeMounted()
+
+data is available even after reload (persistence)
+    1. sessionStorage: clears when tab/browser closed
+    2. localStorage: permanent until manually cleared
+
+CSP (content security policy)
+allow resources from specific origins, to enhance security
+
+Content-Security-Policy: key val val val; key val; ...
+e.g. 
+
+Content-Security-Policy:
+default-src 'self';
+img-src 'self' catpics.com;
+script-src 'self' 'unsafe-inline' unkpg.com;
+style-src 'self' 'unsafe-inline';
+
+'self': allow from self origin
+'unsafe-inline': allow inline scripts/styles
+
+DOM events:
+by default bubble-up: child -> parent -> grand-parent -> ...going up
+
+if parent says { capture: true }
+event reaches to parent first, then child
+i.e. parent -> child -> grand-parent -> ...going up
+
+elem.addEventListener(eventName, handler, { capture: true })
+
+vue custom events:
+components can do: this.$emit('eventName', payload)
+@eventName='handler' // to listen
+
+when using promises:
+promise.then(onFulfilled, onRejected)
+
+what if:
+.then(onFulfilled, onRejected) // error is dealt here
+.catch(onRejected) // this is skipped
+
+object references:
+student1 = {name: 'vidu'}
+student2 = student1 // both refers to same object
+
+student2.name = 'rahul'
+student1 // {name: 'rahul'}
+student2 // {name: 'rahul'}
+
+⚠️ `this` in methods
+arrow functions: window
+normal functions: containing object
+
+.bind won't works on arrow functions
+
+getter/setter:
+let obj = {
+  get tools() {},
+  set tools(value) {
+    // value = 'Screwdriver'
+  }
+}
+
+⚠️ pls don't call get/set methods
+obj.tools // get
+obj.tools = 'Screwdriver' // set
+
+vue if/show:
+v-if: element is removed from DOM when condition is falsy
+v-show: element is hidden using css when condition is falsy (elem always in DOM)
+
+access route params in components:
+this.$route.params.id

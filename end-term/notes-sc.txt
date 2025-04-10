@@ -1,0 +1,79 @@
+awk '$3 > 5'
+awk '$3 > 5 { print $1 }'
+awk '{ print $1 }'
+awk '{ sum += $3 } END { print sum }'
+awk 'BEGIN { sum = 100 } { sum += $3 } END { print sum }'
+awk '{ sum=0; for(i=1; i<=NF; i++) {sum+=$i} print sum }'
+
+awk 'BEGIN {} {} END {}'
+
+echo * // prints all files
+echo *.txt // prints all txt files
+echo a*e // prints files starting a, ending e
+ls | grep 'pattern' // careful about pattern (^, $ etc.)
+
+cron job: * * * * *
+min(0-59), hour(0-23), date(1-31), month(1-12), day(0-6)
+
+script error codes: 0-255
+0: success
+1-255: failure
+
+$1: 1st arg, $2: 2nd arg, ...
+$#: number of args (1, 2, ...)
+
+if [[ var1 -ne var2 ]] // -ne means not equals (var1 != var2)
+
+[[ var =~ pattern]] // pattern matching
+
+command1 && command2 || command3
+  command1 && (command2 || command3)
+  (command1 && command2) || command3
+
+sort -u // keep unique rows, remove duplicates
+uniq // removes consecutive duplicates
+
+cut -d' ' -f1
+cut -d' ' -f1-3
+
+-d // delimiter/separator
+-f // field
+
+cat file | cut
+cut file
+
+cat file | grep
+grep file
+
+read -r // bit safer with backslashes
+
+grep -q // shows not output
+  exit code 0: found
+  exit code 1: not found
+
+$? // last command's exit code
+
+sed:
+sed '1,3d' // delete line 1 to 3
+sed '1~3d' // delete line 1, then every 3rd line
+sed '/^$/d // delete empty lines
+sed -n '4,$p' // -n to suppress sed's own printing, $ is last line
+
+BRE: escape all simple and curly braces
+ERE: no escaping needed
+[[:digit:]] // POSIX character class
+
+number of lines in a file:
+cat file | wc -l
+cat file | awk 'END { print NR }'
+
+sed -r // extended regex
+sed -r 's/\*/ /g' // * -> space
+
+tr "-" " " // hyphen -> space
+tr -d "_" // delete underscores
+tr 'a-z' 'A-Z' // lower -> upper
+
+bash slicing
+${var:start:end}
+  ${var:0:1} // 1st char of var
